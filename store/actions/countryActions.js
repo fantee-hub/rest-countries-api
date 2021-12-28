@@ -6,7 +6,7 @@ export const countryAction = () => async (dispatch) => {
   dispatch({
     type: types.FETCH_COUNTRIES,
     payload: {
-      allCountries: countryUrl,
+      allCountries: countryUrl.data,
     },
   });
 };
