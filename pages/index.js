@@ -25,7 +25,7 @@ export default function Home() {
             <Country
               key={uuidv4()}
               id={uuidv4()}
-              name={country.name.official}
+              name={country.name.common}
               population={country.population}
               capital={country.capital}
               region={country.region}
