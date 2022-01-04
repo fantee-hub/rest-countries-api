@@ -1,23 +1,26 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 const Country = ({ id, name, population, capital, region, image }) => {
   return (
     <>
-      <Cards>
-        <img src={image} alt={name} />
-        <div className="card-content">
-          <h3>{name}</h3>
-          <span>
-            <h4>Region:</h4> {region}
-          </span>
-          <span>
-            <h4>Population:</h4> {population}
-          </span>
-          <span>
-            <h4>Capital:</h4> {capital}
-          </span>
-        </div>
-      </Cards>
+      <Link href={`/details/${name.toLowerCase()}`}>
+        <Cards>
+          <img src={image} alt={name} />
+          <div className="card-content">
+            <h3>{name}</h3>
+            <span>
+              <h4>Region:</h4> {region}
+            </span>
+            <span>
+              <h4>Population:</h4> {population}
+            </span>
+            <span>
+              <h4>Capital:</h4> {capital}
+            </span>
+          </div>
+        </Cards>
+      </Link>
     </>
   );
 };
@@ -28,6 +31,7 @@ const Cards = styled.div`
   color: #ffffff;
   border-radius: 0.5rem;
   overflow: hidden;
+  cursor: pointer;
   .card-content {
     padding: 1rem;
     line-height: 2;

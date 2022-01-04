@@ -1,16 +1,40 @@
+import Nav from "../../components/Nav";
+import Link from "next/link";
+import styled from "styled-components";
+
 export default function Detail({ country }) {
   console.log(country);
   return (
-    <div>
-      {country.name.common}
-      {/* <br />
+    <>
+      <Nav />
+      <ButtonHome>
+        <Link href="/">
+          <button>Back</button>
+        </Link>
+      </ButtonHome>
+      <div>
+        {country.name.common}
+        {/* <br />
       {postData.region}
       <br />
       {postData.population}
       <br /> */}
-    </div>
+      </div>
+    </>
   );
 }
+const ButtonHome = styled.div`
+  margin: 3rem;
+  button {
+    padding: 0.7rem 2.5rem;
+    display: block;
+    cursor: pointer;
+    background: transparent;
+    color: hsl(0, 0, 0);
+    border: none;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+  }
+`;
 
 export async function getStaticProps({ params }) {
   const results = await fetch(
