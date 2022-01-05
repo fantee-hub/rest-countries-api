@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Search from "../components/Search";
 import { useDispatch, useSelector } from "react-redux";
 import { countryAction } from "../store/actions/countryActions";
 import { useEffect } from "react";
@@ -20,6 +20,7 @@ export default function Home() {
   return (
     <>
       <Nav />
+      <Search />
       <HomePage>
         <div className="countries">
           {allCountries.map((country) => (
