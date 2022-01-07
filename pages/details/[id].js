@@ -138,7 +138,7 @@ const ButtonHome = styled.div`
     color: #ffffff;
     border: none;
     border-radius: 0.3rem;
-    box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.1);
   }
 `;
 

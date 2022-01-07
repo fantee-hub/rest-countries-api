@@ -4,6 +4,7 @@ import { countryAction } from "../store/actions/countryActions";
 import { useEffect } from "react";
 import Country from "../components/Country";
 import Nav from "../components/Nav";
+import { useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
@@ -17,10 +18,12 @@ export default function Home() {
 
   const { allCountries } = useSelector((state) => state.countries);
 
+  const [selectItem, setSelectItem] = useState("");
+
   return (
     <>
       <Nav />
-      <Search />
+      <Search selectItem={selectItem} setSelectItem={setSelectItem} />
       <HomePage>
         <div className="countries">
           {allCountries.map((country) => (
@@ -41,7 +44,7 @@ export default function Home() {
 }
 
 const HomePage = styled.div`
-  padding: 5rem 3rem;
+  padding: 2rem 3rem;
   background: hsl(207, 26%, 17%);
   .countries {
     display: grid;
