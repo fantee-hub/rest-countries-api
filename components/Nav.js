@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 const Nav = () => {
   return (
     <NavBar>
       <div className="nav-elements">
         <div className="nav-header">
-          <h2>Where in the world?</h2>
+          <Link href="/">
+            <h2>Where in the world?</h2>
+          </Link>
         </div>
         <div className="theme">
           <span>Dark Mode</span>
@@ -23,9 +26,22 @@ const NavBar = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .nav-header {
+      cursor: pointer;
+    }
     .theme {
       span {
         font-weight: 600;
+      }
+    }
+  }
+  @media screen and (max-width: 765px) {
+    padding: 1.5rem 1rem;
+    .nav-elements {
+      .nav-header {
+        h2 {
+          font-size: 1rem;
+        }
       }
     }
   }

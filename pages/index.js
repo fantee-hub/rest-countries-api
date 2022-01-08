@@ -46,14 +46,19 @@ export default function Home() {
 const HomePage = styled.div`
   padding: 2rem 3rem;
   background: hsl(207, 26%, 17%);
+  min-height: 100vh;
   .countries {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
     grid-column-gap: 1rem;
     grid-row-gap: 5rem;
     img {
       height: 12rem;
       object-fit: cover;
     }
+  }
+  @media screen and (max-width: 765px) {
+    padding: 1rem 1rem;
   }
 `;

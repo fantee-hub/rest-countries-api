@@ -11,7 +11,9 @@ const countryReducer = (state = initState, action) => {
     case "FETCH_COUNTRIES":
       return { ...state, allCountries: action.payload.allCountries };
     case "SEARCH_COUNTRY":
-      return { ...state, search: action.payload.searched };
+      return { ...state, allCountries: action.payload.searched };
+    case "REGION":
+      return { ...state, allCountries: action.payload.regions };
     default:
       return { ...state };
   }

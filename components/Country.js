@@ -26,7 +26,7 @@ const Country = ({ id, name, population, capital, region, image }) => {
 };
 
 const Cards = styled.div`
-  max-width: 18rem;
+  width: 18rem;
   background: hsl(209, 23%, 22%);
   color: #ffffff;
   border-radius: 0.5rem;
