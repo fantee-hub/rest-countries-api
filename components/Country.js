@@ -27,11 +27,13 @@ const Country = ({ id, name, population, capital, region, image }) => {
 
 const Cards = styled.div`
   width: 18rem;
-  background: hsl(209, 23%, 22%);
-  color: #ffffff;
+  background: ${(props) => props.theme.navColor};
+  color: ${(props) => props.theme.fontColor};
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.2s ease;
   .card-content {
     padding: 1rem;
     line-height: 2;

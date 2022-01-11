@@ -2,8 +2,7 @@ import * as types from "../types";
 
 const initState = {
   allCountries: [],
-  darkMode: false,
-  search: [],
+  darkMode: [],
 };
 
 const countryReducer = (state = initState, action) => {
@@ -14,6 +13,7 @@ const countryReducer = (state = initState, action) => {
       return { ...state, allCountries: action.payload.searched };
     case "REGION":
       return { ...state, allCountries: action.payload.regions };
+
     default:
       return { ...state };
   }

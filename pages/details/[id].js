@@ -1,6 +1,8 @@
 import Nav from "../../components/Nav";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "../../components/themes";
+import { useAppContext } from "../../components/ThemeContext";
 
 export default function Detail({ country }) {
   console.log(country);
@@ -38,68 +40,72 @@ export default function Detail({ country }) {
     return languages;
   };
 
+  const { theme } = useAppContext();
+
   return (
-    <DetailStyle>
-      <Nav />
-      <ButtonHome>
-        <Link href="/">
-          <button>Back</button>
-        </Link>
-      </ButtonHome>
-      <DetailContent>
-        <div className="flag">
-          <img src={country.flags.png} alt={country.name.common} />
-        </div>
-        <div className="details">
-          <div className="header">
-            <h3>{country.name.common}</h3>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <DetailStyle>
+        <Nav />
+        <ButtonHome>
+          <Link href="/">
+            <button>Back</button>
+          </Link>
+        </ButtonHome>
+        <DetailContent>
+          <div className="flag">
+            <img src={country.flags.png} alt={country.name.common} />
           </div>
-          <div className="texts">
-            <div className="row">
-              <p>
-                <span>Native Name:</span> {getNativeName()}
-              </p>
-
-              <p>
-                <span>Population:</span> {country.population}
-              </p>
-
-              <p>
-                <span>Region:</span> {country.region}
-              </p>
-
-              <p>
-                <span>Sub Region:</span> {country.subregion}
-              </p>
-
-              <p>
-                <span>Capital:</span> {country.capital}
-              </p>
+          <div className="details">
+            <div className="header">
+              <h3>{country.name.common}</h3>
             </div>
-            <div className="row">
-              <p>
-                <span>Top Level Domain: </span>
-                {country.tld}
-              </p>
+            <div className="texts">
+              <div className="row">
+                <p>
+                  <span>Native Name:</span> {getNativeName()}
+                </p>
 
-              <p>
-                <span>Currencies: </span>
-                {getCurrencies()}
-              </p>
+                <p>
+                  <span>Population:</span> {country.population}
+                </p>
 
-              <p>
-                <span>Languages: </span>
-                {getLanguages()}
-              </p>
+                <p>
+                  <span>Region:</span> {country.region}
+                </p>
+
+                <p>
+                  <span>Sub Region:</span> {country.subregion}
+                </p>
+
+                <p>
+                  <span>Capital:</span> {country.capital}
+                </p>
+              </div>
+              <div className="row">
+                <p>
+                  <span>Top Level Domain: </span>
+                  {country.tld}
+                </p>
+
+                <p>
+                  <span>Currencies: </span>
+                  {getCurrencies()}
+                </p>
+
+                <p>
+                  <span>Languages: </span>
+                  {getLanguages()}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </DetailContent>
-    </DetailStyle>
+        </DetailContent>
+      </DetailStyle>
+    </ThemeProvider>
   );
 }
 const DetailStyle = styled.div`
-  background: hsl(207, 26%, 17%);
+  background-color: ${(props) => props.theme.body};
   height: 100vh;
 `;
 const DetailContent = styled.div`

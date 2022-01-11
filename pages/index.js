@@ -6,8 +6,11 @@ import Country from "../components/Country";
 import Nav from "../components/Nav";
 import { useState } from "react";
 
+import { lightTheme, darkTheme } from "../components/themes";
+
+import { useAppContext } from "../components/ThemeContext";
 import { v4 as uuidv4 } from "uuid";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,32 +23,38 @@ export default function Home() {
 
   const [selectItem, setSelectItem] = useState("");
 
+  const { theme } = useAppContext();
+
   return (
     <>
-      <Nav />
-      <Search selectItem={selectItem} setSelectItem={setSelectItem} />
-      <HomePage>
-        <div className="countries">
-          {allCountries.map((country) => (
-            <Country
-              key={uuidv4()}
-              id={uuidv4()}
-              name={country.name.common}
-              population={country.population}
-              capital={country.capital}
-              region={country.region}
-              image={country.flags.svg}
-            />
-          ))}
-        </div>
-      </HomePage>
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <Nav />
+        <Search selectItem={selectItem} setSelectItem={setSelectItem} />
+
+        <HomePage>
+          <div className="countries">
+            {allCountries.map((country) => (
+              <Country
+                key={uuidv4()}
+                id={uuidv4()}
+                name={country.name.common}
+                population={country.population}
+                capital={country.capital}
+                region={country.region}
+                image={country.flags.svg}
+              />
+            ))}
+          </div>
+        </HomePage>
+      </ThemeProvider>
     </>
   );
 }
 
 const HomePage = styled.div`
   padding: 2rem 3rem;
-  background: hsl(207, 26%, 17%);
+  background: ${(props) => props.theme.body};
+  transition: all 0.2s ease;
   min-height: 100vh;
   .countries {
     display: grid;

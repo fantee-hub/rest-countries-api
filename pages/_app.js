@@ -3,15 +3,18 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createWrapper } from "next-redux-wrapper";
 import store from "../store/store";
-import GlobalStyles from "../components/GlobalStyles";
+import { GlobalStyles } from "../components/themes";
+import { AppWrapper } from "../components/ThemeContext";
 
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
       <Provider store={store}>
-        <GlobalStyles />
-        <Component {...pageProps}></Component>
+        <AppWrapper>
+          <GlobalStyles />
+          <Component {...pageProps}></Component>
+        </AppWrapper>
       </Provider>
     );
   }

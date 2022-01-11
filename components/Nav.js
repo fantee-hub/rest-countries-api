@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useAppContext } from "../components/ThemeContext";
 
 const Nav = () => {
+  const { toggleTheme } = useAppContext();
+
   return (
     <NavBar>
       <div className="nav-elements">
         <div className="nav-header">
           <Link href="/">
-            <h2>Where in the world?</h2>
+            <h2>Where in the world? </h2>
           </Link>
         </div>
-        <div className="theme">
+        <div onClick={() => toggleTheme()} className="theme">
           <span>Dark Mode</span>
         </div>
       </div>
@@ -19,17 +22,23 @@ const Nav = () => {
 };
 
 const NavBar = styled.nav`
-  background: hsl(209, 23%, 22%);
-  color: #ffffff;
+  background-color: ${(props) => props.theme.navColor};
+  color: ${(props) => props.theme.fontColor};
+  position: relative;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 3rem;
+  transition: all 0.2s ease;
+
   .nav-elements {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .nav-header {
       cursor: pointer;
     }
     .theme {
+      cursor: pointer;
       span {
         font-weight: 600;
       }
