@@ -1,9 +1,8 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext();
 
 export function AppWrapper({ children }) {
-  const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState("dark");
   const toggleTheme = () => {
     if (theme === "light") {
@@ -17,7 +16,6 @@ export function AppWrapper({ children }) {
         localStorage.setItem("theme", JSON.stringify("light"));
       }
     }
-    // setTheme(theme === "light" ? "dark" : "light");
   };
 
   const setLocalTheme = (localTheme) => {
@@ -25,9 +23,7 @@ export function AppWrapper({ children }) {
   };
 
   return (
-    <ThemeContext.Provider
-      value={{ theme, toggleTheme, loading, setLoading, setLocalTheme }}
-    >
+    <ThemeContext.Provider value={{ theme, toggleTheme, setLocalTheme }}>
       {children}
     </ThemeContext.Provider>
   );

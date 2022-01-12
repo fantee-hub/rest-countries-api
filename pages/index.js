@@ -7,7 +7,6 @@ import Nav from "../components/Nav";
 import { useState } from "react";
 import preloader from "../public/preloader.gif";
 import { lightTheme, darkTheme } from "../components/themes";
-
 import { useAppContext } from "../components/ThemeContext";
 import { v4 as uuidv4 } from "uuid";
 import styled, { ThemeProvider } from "styled-components";
@@ -65,12 +64,11 @@ export default function Home() {
 const HomePage = styled.div`
   padding: 2rem 3rem;
   background: ${(props) => props.theme.body};
-
   min-height: 100vh;
   .countries {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    justify-content: space-between;
+    justify-items: center;
     grid-column-gap: 0.2rem;
     grid-row-gap: 5rem;
     padding: 0rem;

@@ -1,4 +1,3 @@
 export const FETCH_COUNTRIES = "FETCH_COUNTRIES";
 export const SEARCH_COUNTRY = "SEARCH_COUNTRY";
 export const REGION = "REGION";
-export const LOAD_COUNTRY = "LOAD_COUNTRY";

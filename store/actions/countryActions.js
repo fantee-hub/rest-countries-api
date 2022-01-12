@@ -2,9 +2,6 @@ import * as types from "../types";
 import axios from "axios";
 
 export const countryAction = () => async (dispatch) => {
-  dispatch({
-    type: types.LOAD_COUNTRY,
-  });
   const countryUrl = await axios.get("https://restcountries.com/v3.1/all");
 
   dispatch({
@@ -16,9 +13,6 @@ export const countryAction = () => async (dispatch) => {
 };
 
 export const SearchCountry = (name) => async (dispatch) => {
-  dispatch({
-    type: types.LOAD_COUNTRY,
-  });
   const search = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
 
   dispatch({
