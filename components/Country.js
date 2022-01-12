@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useAppContext } from "./ThemeContext";
 
 const Country = ({ id, name, population, capital, region, image }) => {
   return (

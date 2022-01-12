@@ -3,9 +3,15 @@ import Link from "next/link";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/themes";
 import { useAppContext } from "../../components/ThemeContext";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Detail({ country }) {
-  console.log(country);
+  const { theme, setLocalTheme } = useAppContext();
+  useEffect(() => {
+    const theme = JSON.parse(localStorage.getItem("theme"));
+    if (theme) setLocalTheme(theme);
+  }, [theme]);
 
   const getCurrencies = () => {
     let data = country.currencies;
@@ -40,80 +46,79 @@ export default function Detail({ country }) {
     return languages;
   };
 
-  const { theme } = useAppContext();
-
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <DetailStyle>
-        <Nav />
-        <ButtonHome>
-          <Link href="/">
-            <button>Back</button>
-          </Link>
-        </ButtonHome>
-        <DetailContent>
-          <div className="flag">
-            <img src={country.flags.png} alt={country.name.common} />
-          </div>
-          <div className="details">
-            <div className="header">
-              <h3>{country.name.common}</h3>
+    <>
+      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        <DetailStyle>
+          <Nav />
+          <ButtonHome>
+            <Link href="/">
+              <button>Back</button>
+            </Link>
+          </ButtonHome>
+          <DetailContent>
+            <div className="flag">
+              <img src={country.flags.png} alt={country.name.common} />
             </div>
-            <div className="texts">
-              <div className="row">
-                <p>
-                  <span>Native Name:</span> {getNativeName()}
-                </p>
-
-                <p>
-                  <span>Population:</span> {country.population}
-                </p>
-
-                <p>
-                  <span>Region:</span> {country.region}
-                </p>
-
-                <p>
-                  <span>Sub Region:</span> {country.subregion}
-                </p>
-
-                <p>
-                  <span>Capital:</span> {country.capital}
-                </p>
+            <div className="details">
+              <div className="header">
+                <h3>{country.name.common}</h3>
               </div>
-              <div className="row">
-                <p>
-                  <span>Top Level Domain: </span>
-                  {country.tld}
-                </p>
+              <div className="texts">
+                <div className="row">
+                  <p>
+                    <span>Native Name:</span> {getNativeName()}
+                  </p>
 
-                <p>
-                  <span>Currencies: </span>
-                  {getCurrencies()}
-                </p>
+                  <p>
+                    <span>Population:</span> {country.population}
+                  </p>
 
-                <p>
-                  <span>Languages: </span>
-                  {getLanguages()}
-                </p>
+                  <p>
+                    <span>Region:</span> {country.region}
+                  </p>
+
+                  <p>
+                    <span>Sub Region:</span> {country.subregion}
+                  </p>
+
+                  <p>
+                    <span>Capital:</span> {country.capital}
+                  </p>
+                </div>
+                <div className="row">
+                  <p>
+                    <span>Top Level Domain: </span>
+                    {country.tld}
+                  </p>
+
+                  <p>
+                    <span>Currencies: </span>
+                    {getCurrencies()}
+                  </p>
+
+                  <p>
+                    <span>Languages: </span>
+                    {getLanguages()}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </DetailContent>
-      </DetailStyle>
-    </ThemeProvider>
+          </DetailContent>
+        </DetailStyle>
+      </ThemeProvider>
+    </>
   );
 }
 const DetailStyle = styled.div`
   background-color: ${(props) => props.theme.body};
-  height: 100vh;
 `;
 const DetailContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #ffffff;
-  padding: 1.5rem 3rem;
+  color: ${(props) => props.theme.fontColor};
+  padding: 4rem 3rem;
   .flag {
     img {
       width: 30rem;
@@ -168,7 +173,11 @@ const DetailContent = styled.div`
     }
     .details {
       padding: 1.5rem 0;
-      .texts {
+      .texts {lse if (router.pathname === "/") {
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
         display: flex;
         flex-direction: column;
 
@@ -185,11 +194,11 @@ const ButtonHome = styled.div`
     padding: 0.7rem 2.5rem;
     display: block;
     cursor: pointer;
-    background: hsl(209, 23%, 22%);
-    color: #ffffff;
+    background: ${(props) => props.theme.navColor};
+    color: ${(props) => props.theme.fontColor};
     border: none;
     border-radius: 0.3rem;
-    box-shadow: 3px 3px 10px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
   }
   @media screen and (max-width: 765px) {
     margin: 2rem 1rem;
@@ -203,6 +212,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       country: results[0],
+      data: results,
     },
   };
 }

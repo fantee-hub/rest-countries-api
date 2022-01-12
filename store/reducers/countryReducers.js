@@ -3,16 +3,33 @@ import * as types from "../types";
 const initState = {
   allCountries: [],
   darkMode: [],
+  isLoaded: true,
 };
 
 const countryReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_COUNTRIES":
-      return { ...state, allCountries: action.payload.allCountries };
+      return {
+        ...state,
+        allCountries: action.payload.allCountries,
+        isLoaded: false,
+      };
+
     case "SEARCH_COUNTRY":
-      return { ...state, allCountries: action.payload.searched };
+      return {
+        ...state,
+        allCountries: action.payload.searched,
+      };
     case "REGION":
-      return { ...state, allCountries: action.payload.regions };
+      return {
+        ...state,
+        allCountries: action.payload.regions,
+      };
+    case "LOAD_COUNTRY":
+      return {
+        ...state,
+        isLoaded: true,
+      };
 
     default:
       return { ...state };

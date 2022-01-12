@@ -75,6 +75,7 @@ const Container = styled.div`
   background: ${(props) => props.theme.body};
   color: ${(props) => props.theme.fontColor};
   padding: 2rem 3rem;
+
   transition: all 0.2s ease;
   @media screen and (max-width: 765px) {
     padding: 2rem 1rem;
@@ -86,6 +87,7 @@ const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   
   .row {
     form{
@@ -146,6 +148,7 @@ const SearchContainer = styled.div`
     
     display:grid;
     grid-template-columns: 1fr;
+    
    .row{
      form{
       

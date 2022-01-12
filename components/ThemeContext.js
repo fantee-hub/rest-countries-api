@@ -1,17 +1,33 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext();
 
 export function AppWrapper({ children }) {
+  const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState("dark");
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    if (theme === "light") {
+      setTheme("dark");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("theme", JSON.stringify("dark"));
+      }
+    } else {
+      setTheme("light");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("theme", JSON.stringify("light"));
+      }
+    }
+    // setTheme(theme === "light" ? "dark" : "light");
   };
-  // const color = theme === "light" ? "#333" : "#fff";
-  // const backgroundCOlor = theme === "light" ? "#FFF" : "hsl(207, 26%, 17%)";
+
+  const setLocalTheme = (localTheme) => {
+    setTheme(localTheme);
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{ theme, toggleTheme, loading, setLoading, setLocalTheme }}
+    >
       {children}
     </ThemeContext.Provider>
   );

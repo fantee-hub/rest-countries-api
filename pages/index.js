@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Country from "../components/Country";
 import Nav from "../components/Nav";
 import { useState } from "react";
-
+import preloader from "../public/preloader.gif";
 import { lightTheme, darkTheme } from "../components/themes";
 
 import { useAppContext } from "../components/ThemeContext";
@@ -23,14 +23,25 @@ export default function Home() {
 
   const [selectItem, setSelectItem] = useState("");
 
-  const { theme } = useAppContext();
+  const { theme, loading, setLocalTheme } = useAppContext();
+
+  useEffect(() => {
+    const theme = JSON.parse(localStorage.getItem("theme"));
+    if (theme) setLocalTheme(theme);
+  }, [theme]);
 
   return (
     <>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <Nav />
         <Search selectItem={selectItem} setSelectItem={setSelectItem} />
-
+        {loading ? (
+          <div>
+            <img src={preloader} alt="preloader" />
+          </div>
+        ) : (
+          ""
+        )}
         <HomePage>
           <div className="countries">
             {allCountries.map((country) => (
