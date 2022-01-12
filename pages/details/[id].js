@@ -30,7 +30,7 @@ export default function Detail({ country }) {
       }
     }
   };
-  console.log(getNativeName());
+
   const getLanguages = () => {
     let data = country.languages;
     let languages = [];
@@ -200,19 +200,18 @@ const ButtonHome = styled.div`
   }
 `;
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const results = await fetch(
     `https://restcountries.com/v3.1/name/${params.id}`
   ).then((r) => r.json());
   return {
     props: {
-      country: results[0],
-      data: results,
+      country: results[0] || null,
     },
   };
 }
 
-export async function getStaticPaths() {
+export async function getServerSidePaths() {
   const countries = await fetch(`https://restcountries.com/v3.1/all`).then(
     (r) => r.json()
   );
