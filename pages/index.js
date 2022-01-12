@@ -65,20 +65,26 @@ export default function Home() {
 const HomePage = styled.div`
   padding: 2rem 3rem;
   background: ${(props) => props.theme.body};
-  transition: all 0.2s ease;
+
   min-height: 100vh;
   .countries {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    justify-items: center;
-    grid-column-gap: 1rem;
+    justify-content: space-between;
+    grid-column-gap: 0.2rem;
     grid-row-gap: 5rem;
+    padding: 0rem;
     img {
       height: 12rem;
       object-fit: cover;
     }
   }
   @media screen and (max-width: 765px) {
-    padding: 1rem 1rem;
+    padding: 1rem 0rem;
+    .countries {
+      grid-column-gap: 0rem;
+      grid-row-gap: 3rem;
+      justify-items: center;
+    }
   }
 `;

@@ -3,7 +3,6 @@ import Link from "next/link";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../../components/themes";
 import { useAppContext } from "../../components/ThemeContext";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function Detail({ country }) {
@@ -173,11 +172,7 @@ const DetailContent = styled.div`
     }
     .details {
       padding: 1.5rem 0;
-      .texts {lse if (router.pathname === "/") {
-      setLoading(false);
-    } else {
-      setLoading(false);
-    }
+      
         display: flex;
         flex-direction: column;
 

@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import { SearchCountry } from "../store/actions/countryActions";
 import { CountryRegion } from "../store/actions/countryActions";
 import { useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import search from "../public/search.svg";
 
 export default function Search({ selectItem, setSelectItem }) {
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -49,7 +52,12 @@ export default function Search({ selectItem, setSelectItem }) {
         <div className="row">
           <div className="dropdown">
             <div className="dropdown-btn" onClick={toggleSelect}>
-              {selectItem ? selectItem : "Filter by Region"}
+              <span>{selectItem ? selectItem : "Filter by Region"}</span>
+              <span>
+                <FontAwesomeIcon
+                  icon={toggleDropdown ? faCaretUp : faCaretDown}
+                />
+              </span>
             </div>
             {toggleDropdown && (
               <div className="dropdown-content">
@@ -76,7 +84,6 @@ const Container = styled.div`
   color: ${(props) => props.theme.fontColor};
   padding: 2rem 3rem;
 
-  transition: all 0.2s ease;
   @media screen and (max-width: 765px) {
     padding: 2rem 1rem;
   }
@@ -85,22 +92,23 @@ const Container = styled.div`
 const SearchContainer = styled.div`
   
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
   
   
   .row {
     form{
-      width:95%;
+      
     input {
+      width:100%;
       padding: 0.8rem 2rem;
       border: none;
-      
+      background-image: url('../public/search.svg');
       background: ${(props) => props.theme.navColor};
       border-radius: 0.2rem;
       color: ${(props) => props.theme.input};
       box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
-      transition: all 0.2s ease;
+      
       &:focus {
         outline: none;
       }
@@ -112,7 +120,7 @@ const SearchContainer = styled.div`
       width: 10rem;
       
       color: ${(props) => props.theme.fontColor};
-      transition: all 0.2s ease;
+      
       position: relative;
       font-size: 0.9rem;
       left: 0;
@@ -122,7 +130,9 @@ const SearchContainer = styled.div`
         background: ${(props) => props.theme.navColor};
         border-radius: 0.2rem;
         cursor: pointer;
-        transition: all 0.2s ease;
+        display:flex;
+        justify-content:space-between;
+        
       }
       .dropdown-content {
         position: absolute;
@@ -132,7 +142,7 @@ const SearchContainer = styled.div`
         background: ${(props) => props.theme.navColor};
         border-radius: 0.2rem;
         width: 100%;
-        transition: all 0.2s ease;
+        
         .dropdown-item {
           padding: 0.5rem 0.8rem;
           cursor: pointer;
@@ -153,8 +163,8 @@ const SearchContainer = styled.div`
      form{
       
       input{
-        width:90%;
-      padding:1rem 1.2rem !important;
+      width:90%;
+      padding:1rem 0rem 1rem 1.2rem !important;
       margin:0;
       
     }

@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useAppContext } from "../components/ThemeContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
-  const { toggleTheme } = useAppContext();
+  const { toggleTheme, theme } = useAppContext();
 
   return (
     <NavBar>
@@ -14,7 +16,10 @@ const Nav = () => {
           </Link>
         </div>
         <div onClick={() => toggleTheme()} className="theme">
-          <span>Dark Mode</span>
+          <span>
+            <FontAwesomeIcon icon={theme === "light" ? faMoon : faSun} />
+          </span>
+          <span> {theme === "light" ? "Dark Mode" : "Light Mode"}</span>
         </div>
       </div>
     </NavBar>
@@ -27,7 +32,6 @@ const NavBar = styled.nav`
   position: relative;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 3rem;
-  transition: all 0.2s ease;
 
   .nav-elements {
     display: flex;

@@ -35,7 +35,7 @@ const Cards = styled.div`
   border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.2s ease;
+
   .card-content {
     padding: 1rem;
     line-height: 2;
